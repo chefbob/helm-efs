@@ -1,0 +1,32 @@
+name: "efs"
+version: "1.0.0"
+usage: "inject AWS EFS FileSystemId into Helm Charts"
+description: |-
+  This plugin provides the ability to insert the AWS EFS FileSystemId variable into your
+  value files to allow for dynamically populating this value  into the Helm chart during installs or upgrades.  I wrote this module
+  because we use Terraform to bring up our EFS backed EKS environment and then run Helm Charts to bring up the application containers in EKS.
+
+  Usage:
+  Simply use helm as you would normally, but add 'efs' before any command,
+  the plugin will query AWS for the FileSystemID value based on the name of the File system:
+
+      {{efs Name region}}
+
+  and populate that field with the value..
+  Note: You must have permission to query EFS from the node where the Helm deploy is running..
+
+  E.g:
+  helm install stable/efs-provisioner -f value.dev.yaml efs
+
+  value.dev.yaml:
+  ---
+  efsProvisioner:
+    efsFileSystemId: "{{efs EFSName us-east-1}}"
+    awsRegion: us-east-1
+    storageClass:
+      isDefault: false
+    mountOptions:
+      - tls
+  ---
+command: "$HELM_PLUGIN_DIR/efs.sh"
+useTunnel: true

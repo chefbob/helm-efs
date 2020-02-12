@@ -1,0 +1,11 @@
+replicaCount: 1
+
+image:
+  repository: quay.io/external_storage/efs-provisioner
+  tag: stable
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+efsFileSystemId: "{{efs TestEFS us-east-1}}"
