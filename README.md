@@ -33,8 +33,9 @@ Optionally, if you have the same EFS Name for different profiles, you can set it
 >Note #3: Currently, helm-efs does not work when the value of the parameter is in the default chart values.
 
 E.g:
-helm install stable/efs-provisioner -f value.dev.yaml efs
 
+helm install stable/efs-provisioner -f value.dev.yaml efs
+```
 value.dev.yaml:
 ---
 efsProvisioner:
@@ -44,6 +45,7 @@ efsProvisioner:
     isDefault: false
   mountOptions:
     - tls
+```
 ---
 
 ## Testing
