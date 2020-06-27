@@ -34,7 +34,7 @@ function printUsage () {
   Note: You must have permission to query EFS from the node where the Helm deploy is running..
 
   E.g:
-  helm install stable/efs-provisioner -f value.dev.yaml efs
+  helm efs install stable/efs-provisioner -f value.dev.yaml
 
   value.dev.yaml:
   ---
